@@ -1,0 +1,58 @@
+{
+  "name": "@johnlindquist/mac-clipboard-listener",
+  "author": "John Lindquist (https://johnlindquist.com)",
+  "license": "ISC",
+  "version": "0.0.0-development",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Access the macOS clipboard-listener from Node.js",
+  "main": "index.js",
+  "source": "index.ts",
+  "types": "index.d.ts",
+  "module": "index.js",
+  "files": [
+    "index.js",
+    "binding.gyp",
+    "index.d.ts",
+    "clipboard-listener.mm",
+    "build/**/*"
+  ],
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "node-gyp": "^9.4.0",
+    "semantic-release": "^21.0.7",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.0.0"
+  },
+  "scripts": {
+    "build": "node-gyp rebuild && tsc -m nodenext -d index.ts"
+  },
+  "os": [
+    "darwin"
+  ],
+  "release": {
+    "branches": [
+      "+([0-9]).x",
+      "main",
+      "next",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm"
+    ]
+  }
+}
