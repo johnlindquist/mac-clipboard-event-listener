@@ -1,14 +1,21 @@
+// index.ts
 import bindings from "bindings";
-const addon = bindings("mac-clipboard-listener.node");
-export const onClipboardImageChange = (handler) => {
-    addon.onClipboardImageChange(handler);
+var addon = bindings("mac-clipboard-listener.node");
+var onClipboardImageChange = (handler) => {
+  addon.onClipboardImageChange(handler);
 };
-export const onClipboardTextChange = (handler) => {
-    addon.onClipboardTextChange(handler);
+var onClipboardTextChange = (handler) => {
+  addon.onClipboardTextChange(handler);
 };
-export const start = () => {
-    addon.start();
+var start = () => {
+  addon.start();
 };
-export const stop = () => {
-    addon.stop();
+var stop = () => {
+  addon.stop();
+};
+export {
+  onClipboardImageChange,
+  onClipboardTextChange,
+  start,
+  stop
 };

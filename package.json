@@ -7,10 +7,15 @@
     "access": "public"
   },
   "description": "Access the macOS clipboard-listener from Node.js",
-  "main": "index.js",
+  "main": "index.cjs",
+  "module": "index.js",
+  "exports": {
+    "import": "./index.js",
+    "require": "./index.cjs",
+    "default": "./index.cjs"
+  },
   "source": "index.ts",
   "types": "index.d.ts",
-  "module": "index.js",
   "files": [
     "index.js",
     "binding.gyp",
@@ -21,6 +26,7 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^20.4.5",
+    "esbuild": "^0.18.17",
     "node-gyp": "^9.4.0",
     "semantic-release": "^21.0.7",
     "typescript": "^5.1.6"
@@ -30,7 +36,7 @@
     "node-addon-api": "^7.0.0"
   },
   "scripts": {
-    "build": "node-gyp rebuild && tsc -m nodenext -d index.ts"
+    "build": "node-gyp rebuild && esbuild index.ts --bundle --platform=node --packages=external --target=node18 --format=esm --outfile=index.js && esbuild index.ts --bundle --platform=node --target=node18 --format=cjs --packages=external  --outfile=index.cjs"
   },
   "os": [
     "darwin"
